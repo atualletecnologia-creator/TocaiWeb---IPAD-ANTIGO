@@ -1,29 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  --burgundy: #6D071A;
+  --burgundy-light: #8E1C31;
+  --white: #FFFFFF;
+  --bg: #F7F7F7;
+  --text: #1E1E1E;
+  --muted: #777777;
+  --border: #E6E2E2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  color: #222;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
 header {
-  background: white;
-  padding: 24px 16px;
+  background: var(--burgundy);
+  color: var(--white);
+  padding: 34px 16px 26px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 32px;
 }
 
 header p {
-  margin: 6px 0 0;
-  color: #777;
+  margin: 16px 0 0;
+  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.brand-white {
+  color: var(--white);
+}
+
+.brand-mark {
+  position: relative;
+  width: 42px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.brand-mark span {
+  display: block;
+  width: 6px;
+  border-radius: 20px;
+  background: currentColor;
+}
+
+.brand-mark span:nth-child(1),
+.brand-mark span:nth-child(5) {
+  height: 24px;
+}
+
+.brand-mark span:nth-child(2),
+.brand-mark span:nth-child(4) {
+  height: 40px;
+}
+
+.brand-mark span:nth-child(3) {
+  height: 58px;
+}
+
+.brand-mark i {
+  position: absolute;
+  bottom: -5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.brand-name {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 7px;
 }
 
 main {
-  padding: 16px;
+  padding: 18px 16px;
   max-width: 720px;
   margin: auto;
 }
@@ -33,43 +102,58 @@ input,
 button {
   width: 100%;
   box-sizing: border-box;
-  padding: 14px;
+  padding: 15px;
   margin-bottom: 12px;
-  font-size: 16px;
-  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  border-radius: 16px;
 }
 
 select,
 input {
-  border: 1px solid #ddd;
-  background: white;
+  border: 1px solid var(--border);
+  background: var(--white);
+  outline: none;
+}
+
+select:focus,
+input:focus {
+  border-color: var(--burgundy-light);
 }
 
 button {
   border: none;
-  background: #111;
-  color: white;
+  background: var(--burgundy);
+  color: var(--white);
+  font-weight: 600;
 }
 
 button.secondary {
-  background: white;
-  color: #111;
-  border: 1px solid #ddd;
+  background: var(--white);
+  color: var(--burgundy);
+  border: 1px solid var(--border);
 }
 
 .card,
 .panel,
 .culto-item {
-  background: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 14px;
-  padding: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
   margin-bottom: 12px;
 }
 
+.panel h2 {
+  margin: 0 0 14px;
+  color: var(--burgundy);
+  font-size: 20px;
+}
+
 .card h3 {
-  margin: 0 0 12px;
-  font-size: 17px;
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .hidden {
@@ -85,7 +169,7 @@ button.secondary {
   flex: 1;
   margin: 0;
   padding: 12px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .culto-item strong {
@@ -96,6 +180,16 @@ button.secondary {
 footer {
   text-align: center;
   padding: 24px 16px;
-  color: #777;
-  font-size: 13px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions button {
+    width: 100%;
+  }
 }

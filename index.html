@@ -6,13 +6,27 @@
 
 <title>Tocai iPad</title>
 
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
 
 <header>
-  <h1>Tocai</h1>
+  <div class="brand brand-white">
+    <div class="brand-mark">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <i></i>
+    </div>
+
+    <div class="brand-name">
+      TOCAI
+    </div>
+  </div>
+
   <p>Versão leve para iPad antigo</p>
 </header>
 
@@ -24,6 +38,11 @@
 
   <section id="cultoPanel" class="hidden panel">
     <h2>Lista de Culto</h2>
+
+    <button class="secondary" onclick="clearCultoList()">
+      Limpar Lista
+    </button>
+
     <div id="cultoList"></div>
   </section>
 
@@ -66,7 +85,7 @@
   © 2026 Atualle Tecnologia. Todos os direitos reservados.
 </footer>
 
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 
 </body>
 </html>
