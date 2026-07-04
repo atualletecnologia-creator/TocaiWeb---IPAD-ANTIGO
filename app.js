@@ -3,31 +3,6 @@ const API_KEY = "AIzaSyB5S62bfDT-aGKNWfKRrnbIGbh70wJ8Eug";
 var cultoList = [];
 
 loadCultoList();
-setupSearchEnter();
-
-function setupSearchEnter() {
-  setTimeout(function () {
-    var input = document.getElementById('searchInput');
-
-    if (!input) {
-      return;
-    }
-
-    input.onkeydown = function (event) {
-      event = event || window.event;
-
-      var key = event.key || event.keyCode;
-
-      if (key === 'Enter' || key === 13) {
-        if (event.preventDefault) {
-          event.preventDefault();
-        }
-
-        searchPDFs();
-      }
-    };
-  }, 100);
-}
 
 function searchPDFs() {
   var folderId = document.getElementById('instrumentSelect').value;
@@ -40,9 +15,6 @@ function searchPDFs() {
     "and name contains '" + query + "'" +
     "&fields=files(id,name)" +
     "&key=" + API_KEY;
-
-  var results = document.getElementById('results');
-  results.innerHTML = '<p>Buscando...</p>';
 
   var xhr = new XMLHttpRequest();
 
@@ -112,6 +84,7 @@ function addToCulto(id, name) {
     name: name
   });
 
+  saveCultoList();
   renderCultoList();
 
   alert('Adicionado à lista de culto');
@@ -128,20 +101,34 @@ function removeFromCulto(id) {
 
   cultoList = newList;
 
+  saveCultoList();
   renderCultoList();
 }
 
-function loadCultoList() {
-  cultoList = [];
-
-  localStorage.removeItem(
-    'tocai_culto_list_ipad'
+function saveCultoList() {
+  localStorage.setItem(
+    'tocai_culto_list_ipad',
+    JSON.stringify(cultoList)
   );
+}
+
+
+function loadCultoList() {
+  var saved = localStorage.getItem('tocai_culto_list_ipad');
+
+  if (saved) {
+    try {
+      cultoList = JSON.parse(saved) || [];
+    } catch(e) {
+      cultoList = [];
+    }
+  }
 
   setTimeout(function () {
     renderCultoList();
-  }, 100);
+  },100);
 }
+
 
 function renderCultoList() {
   var container = document.getElementById('cultoList');
@@ -174,18 +161,6 @@ function renderCultoList() {
   }
 }
 
-function clearCultoList() {
-  if (!confirm('Deseja limpar toda a lista de culto?')) {
-    return;
-  }
-
-  cultoList = [];
-  localStorage.removeItem(
-    'tocai_culto_list_ipad'
-  );
-  renderCultoList();
-}
-
 function toggleCultoList() {
   var panel = document.getElementById('cultoPanel');
 
@@ -195,12 +170,3 @@ function toggleCultoList() {
     panel.className = 'hidden panel';
   }
 }
-
-window.addEventListener(
-  'beforeunload',
-  function () {
-    localStorage.removeItem(
-      'tocai_culto_list_ipad'
-    );
-  }
-);
